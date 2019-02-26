@@ -24,7 +24,7 @@ class Monitor extends Component {
           // console.log(this.state.orders);
       }
       const totalPrice = this.state.totalPrice + parseInt(product.unitPrice);
-      this.setState({totalPrice: totalPrice, orders: this.state.orders});
+      this.setState({totalPrice: totalPrice, orders: this.state.orders, alert: false, alertClass: '', msg: ''});
     }
 
     delOrder(product) {
@@ -47,6 +47,9 @@ class Monitor extends Component {
             msg: 'สั่งซื้อสิ้นค้าเรียบร้อย ^^'
           })
         )
+        
+        //ซ่อนปุ่ม alert หลังจากผ่านไป 3 วิ
+        setTimeout( this.hideAlert , 3000)
       }else{
         this.setState({
           alert: true,
@@ -62,10 +65,19 @@ class Monitor extends Component {
         totalPrice: 0, 
         orders: [],
         alert: true,
-        alertClass: 'secondary',
+        alertClass: 'danger',
         msg: 'ยกเลิกรายการสั่งซื้อเรียบร้อย'
       });
+
+      //ซ่อนปุ่ม alert หลังจากผ่านไป 3 วิ
+      setTimeout( this.hideAlert , 3000)
     }
+
+    hideAlert = () =>  {
+      // ทำเป็น arrow function เพื่อให้สามารถเรียกใช้ this ของ class 
+      this.setState({alert: false, alertClass: '', msg: ''})
+    }
+
 
     render() {
         return (
@@ -76,7 +88,7 @@ class Monitor extends Component {
                     <div className='col-12'>
                       <div className={`alert alert-${this.state.alertClass} alert-dismissible fade show `} role="alert">
                         {this.state.msg}
-                        <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={() => { this.setState({alert: false, alertClass: ''}) }}>
+                        <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={() => this.hideAlert() }>
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
