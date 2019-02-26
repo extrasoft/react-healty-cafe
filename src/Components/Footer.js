@@ -1,31 +1,17 @@
-import React, { Component } from 'react';
+import React from "react";
 
-class Footer extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
+const Footer = (props) => {
+    const {company, email} = props;
     return (
-    
-      <footer class="footer">
-        <div class="container mt-3">
-          <p class="float-right">
-            <a href="#">กลับสู่ด้านบน</a>
-          </p>
-          <p className="text-danger text-uppercase">powered by extrasoft</p>
-          <p className="text-uppercase">contact by email <a href="#">thanapon.yenjam@gmail.com</a></p>
+        <div className="container-fluid">
+            <hr />
+            <div className="text-center title text-uppercase">
+                <small>
+                    <span className="text-danger">Powered By {company}</span> |<span className="text-muted"> Contact By Email : {email}</span>
+                </small>
+            </div>
         </div>
-      </footer>
-        // <div class="footer container-fluid">
-        //   <p class="float-right">
-        //     <a href="#">กลับสู่ด้านบน</a>
-        //   </p>
-        //   <p className="text-danger text-uppercase">powered by extrasoft</p>
-        //   <p className="text-uppercase">contact by email <a href="#">thanapon.yenjam@gmail.com</a></p>
-        // </div>
-
-    );    
-  }
+    )
 }
 
 export default Footer;

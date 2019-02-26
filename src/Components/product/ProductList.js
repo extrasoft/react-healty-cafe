@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import ProductItem from "./ProductItem";
 
 class ProductList extends Component {
-  constructor(props) {
-    super(props);
+  showProducts() {
+    return (
+      this.props.products &&
+      this.props.products.map(product => (
+        <ProductItem key={product.productId} product={product} onAddOrder={this.props.onAddOrder} />
+      ))
+    );
   }
 
   render() {
-    return (
-      <div>Left</div>
-    );
+    return <div className="row">{this.showProducts()}</div>;
   }
 }
 
