@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -40,6 +40,15 @@ class Header extends Component {
             <h5 className="title text-muted mt-4">
               {this.state.date.toLocaleTimeString()}
             </h5>
+            <ul className='list-inline'>
+              <li className='list-inline-item'><Link to='/' className='text-success'> Home</Link></li>
+              <li className='list-inline-item'>|</li>
+              <li className='list-inline-item'><Link to='/orders' className='text-success'> Orders</Link></li>
+              <li className='list-inline-item'>|</li>
+              <li className='list-inline-item'><Link to='/products' className='text-success'> Products</Link></li>
+              <li className='list-inline-item'>|</li>
+              <li className='list-inline-item'><Link to='/about' className='text-success'> About</Link></li>
+            </ul>
           </div>
         </div>
         <hr />
