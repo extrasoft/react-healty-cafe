@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import Axios from 'axios';
+import { connect } from 'react-redux';
+import { ordersFetch, ordersDelete } from '../../actions'
+
 class Orders extends Component {
   constructor(props) {
     super(props);
-    this.state = { orders: [] }
     this.delOrder = this.delOrder.bind(this);
   }
 
   componentDidMount() {
-    Axios.get('http://localhost:3001/orders')
-    .then(res => {
-        this.setState({orders: res.data})
-    })
+    this.props.ordersFetch();
   }
 
   showOrders() {
-    return this.state.orders && this.state.orders.map(order => {
+    return this.props.orders && this.props.orders.map(order => {
       // convert string to date object
       let dateEvent = new Date(order.orderDate);
 
@@ -61,12 +59,7 @@ class Orders extends Component {
 
   delOrder(orderId) {
     // console.log(orderId);
-    Axios.delete(`http://localhost:3001/orders/${orderId}`).then(res => {
-      // console.log(res)
-      Axios.get('http://localhost:3001/orders').then(res => {
-        this.setState({ orders: res.data })
-      })
-    })
+    this.props.ordersDelete(orderId);
   }
   render() {
     return (
@@ -84,4 +77,8 @@ class Orders extends Component {
   }
 }
 
-export default Orders;
+function mapStateToProps({orders}) {
+  return {orders};
+}
+
+export default connect(mapStateToProps, {ordersFetch, ordersDelete})(Orders);

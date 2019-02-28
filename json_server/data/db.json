@@ -17,12 +17,6 @@
       "productName": "บิงซู",
       "unitPrice": "200",
       "thumbnail": "/images/product/3.jpg"
-    },
-    {
-      "id": 4,
-      "productName": "เฟรนฟราย",
-      "unitPrice": "140",
-      "thumbnail": "/images/product/4.jpg"
     }
   ],
   "orders": [
@@ -119,8 +113,8 @@
       "id": 5
     },
     {
-      "orderDate": "2019-02-26T15:05:56.614Z",
-      "totalPrice": 860,
+      "orderDate": "2019-02-28T15:58:39.563Z",
+      "totalPrice": 690,
       "orders": [
         {
           "product": {
@@ -129,7 +123,7 @@
             "unitPrice": "200",
             "thumbnail": "/images/product/3.jpg"
           },
-          "quantity": 2
+          "quantity": 3
         },
         {
           "product": {
@@ -138,16 +132,7 @@
             "unitPrice": "90",
             "thumbnail": "/images/product/2.jpg"
           },
-          "quantity": 2
-        },
-        {
-          "product": {
-            "id": 4,
-            "productName": "เฟรนฟราย",
-            "unitPrice": "140",
-            "thumbnail": "/images/product/4.jpg"
-          },
-          "quantity": 2
+          "quantity": 1
         }
       ],
       "id": 6

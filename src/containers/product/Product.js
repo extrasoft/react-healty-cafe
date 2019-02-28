@@ -2,35 +2,33 @@ import React, { Component } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ProductList from '../../components/product/ProductList';
-import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { productsFetch, productsDelete } from '../../actions'
+
 class Product extends Component {
   constructor(props) {
     super(props);
-    this.state = { products: [] }
+    // this.state = { products: [] }
     this.delOrder = this.delOrder.bind(this);
     this.editOrder = this.editOrder.bind(this);
     this.addOrder = this.addOrder.bind(this);
   }
 
   componentDidMount() {
-    Axios.get('http://localhost:3001/products').then(res => {
-      // console.log(res.data);
-      this.setState({ products: res.data })
-    })
+    this.props.productsFetch();
   }
 
   delOrder(product) {
-    Axios.delete(`http://localhost:3001/products/${product.id}`).then(res => {
-      Axios.get('http://localhost:3001/products').then(res => {
-        this.setState({ products: res.data })
-      })
-    })
+    this.props.productsDelete(product.id);
   }
 
   editOrder(product) {
-    Axios.get(`http://localhost:3001/products/${product.id}`).then(res => {
-      // doSomething()
-    })
+
+    this.props.history.push(`products/edit/${product.id}`)
+    // Axios.get(`http://localhost:3001/products/${product.id}`).then(res => {
+    //   // doSomething()
+    // })
   }
 
   addOrder() {
@@ -45,22 +43,28 @@ class Product extends Component {
          
             <h2>
               สินค้า
-              <button className='btn btn-success text-justify float-right'>เพิ่มสินค้า</button>
+              <button className='btn btn-success text-justify float-right' onClick={() => { this.props.history.push('products/add')}}>เพิ่มสินค้า</button>
             </h2>
         
           <div className='row'>
             <div className='col-12'>
               <ProductList
-                products={this.state.products}
+                products={this.props.products}
                 onDelOrder={this.delOrder}
+                onEditOrder={this.editOrder}
               />
             </div>
           </div>
         </div>
-        <Footer />
+        <Footer company="Thanapon" email="thanapon.yenjam@gmail.com" />
       </div>
     )
   }
 }
 
-export default Product;
+function mapStateToProps({products}) {
+  //return State
+  return {products}
+}
+
+export default withRouter( connect(mapStateToProps, { productsFetch, productsDelete })(Product) );
