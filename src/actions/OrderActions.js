@@ -1,9 +1,9 @@
 import Axios from 'axios';
-import { ORDERS_FETCH, ORDERS_DELETE } from './types';
+import { ORDERS_FETCH, ORDER_DELETE } from './types';
 
 export const ordersFetch = () => {
   return dispatch => {
-    Axios.get('http://localhost:3001/orders').then(res => {
+    Axios.get(`${process.env.REACT_APP_API_URL}/orders`).then(res => {
         dispatch({ 
           type: ORDERS_FETCH, 
           payload: res.data
@@ -12,13 +12,13 @@ export const ordersFetch = () => {
   }
 }
 
-export const ordersDelete = id => {
+export const orderDelete = id => {
   return dispatch => {
-    Axios.delete(`http://localhost:3001/orders/${id}`).then(res => {
+    Axios.delete(`${process.env.REACT_APP_API_URL}/${id}`).then(res => {
       // console.log(res)
-      Axios.get('http://localhost:3001/orders').then(res => {
+      Axios.get(`${process.env.REACT_APP_API_URL}/orders`).then(res => {
         dispatch({ 
-          type: ORDERS_DELETE, 
+          type: ORDER_DELETE, 
           payload: res.data
         })
       })

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { connect } from 'react-redux';
-import { ordersFetch, ordersDelete } from '../../actions'
+import { ordersFetch, orderDelete } from '../../actions'
 
 class Orders extends Component {
   constructor(props) {
@@ -59,7 +59,7 @@ class Orders extends Component {
 
   delOrder(orderId) {
     // console.log(orderId);
-    this.props.ordersDelete(orderId);
+    this.props.orderDelete(orderId);
   }
   render() {
     return (
@@ -81,4 +81,4 @@ function mapStateToProps({orders}) {
   return {orders};
 }
 
-export default connect(mapStateToProps, {ordersFetch, ordersDelete})(Orders);
+export default connect(mapStateToProps, {ordersFetch, orderDelete})(Orders);

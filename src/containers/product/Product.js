@@ -4,7 +4,7 @@ import Footer from '../../components/Footer';
 import ProductList from '../../components/product/ProductList';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { productsFetch, productsDelete } from '../../actions'
+import { productsFetch, productDelete } from '../../actions'
 
 class Product extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class Product extends Component {
   }
 
   delOrder(product) {
-    this.props.productsDelete(product.id);
+    this.props.productDelete(product.id);
   }
 
   editOrder(product) {
@@ -48,11 +48,18 @@ class Product extends Component {
         
           <div className='row'>
             <div className='col-12'>
-              <ProductList
-                products={this.props.products}
-                onDelOrder={this.delOrder}
-                onEditOrder={this.editOrder}
-              />
+              {
+                // ตรวจสอบว่า products ที่ส่งมามันเป็นชิ้นเดียวหรือ array ถ้าเป็น array แล้วถึงจะแสดง ProductList
+                this.props.products && Array.isArray(this.props.products) &&
+                (
+                  <ProductList
+                    products={this.props.products}
+                    onDelOrder={this.delOrder}
+                    onEditOrder={this.editOrder}
+                  />
+                ) 
+              }
+              
             </div>
           </div>
         </div>
@@ -67,4 +74,4 @@ function mapStateToProps({products}) {
   return {products}
 }
 
-export default withRouter( connect(mapStateToProps, { productsFetch, productsDelete })(Product) );
+export default withRouter( connect(mapStateToProps, { productsFetch, productDelete })(Product) );

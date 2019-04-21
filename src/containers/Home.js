@@ -7,10 +7,6 @@ import { connect } from 'react-redux';
 import { productsFetch } from '../actions';
 
 class Home extends Component {
-  constructor(props){
-    super(props);
-    // this.state = {products : []};
-  }
 
   componentDidMount() {
     this.props.productsFetch()
@@ -27,9 +23,10 @@ class Home extends Component {
     );
   }
 }
-function mapStateToProps({products}) {
+function mapStateToProps({products}) { 
+  // ฟังก์ชั่นนี้ใช้สำหรับ ดึง state ที่ได้มาจาก store แล้วแปลงเป็น props ให้ component เรียกใช้งาน
   // console.log(products);
   return { products };
 }
-
-export default connect(mapStateToProps, { productsFetch })(Home); // connect(map state ของ store to props ของ component, ชื่อ action)
+// connect(ชื่อฟังก์ชั่นที่จะใช้ในการดึง state จาก store (จะเป็นชื่ออะไรก็ได้), ชื่อ action ที่เราจะใช้จาก store แล้วตัว redux จะแปลง action นั้นให้เป็น props ด้วย)
+export default connect(mapStateToProps, { productsFetch })(Home); 
